@@ -15,7 +15,11 @@ router.get('/listfilm', function(req, res, next) {
 });
 
 router.get('/review', function(req, res, next) {
-  res.render('singlefilmreview.hbs', { title: 'Review' });
+  res.render('single-film-review.hbs', { title: 'Review' });
+});
+
+router.get('/deals', function(req, res, next) {
+ res.render('deals.hbs', { title: 'Ưu đãi' });  
 });
 
 
