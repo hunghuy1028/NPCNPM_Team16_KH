@@ -688,7 +688,7 @@ img {
 
 /* :: 8.0 Blog Area CSS */
 .single-articles-area {
-  position: relative;
+  position:relative ;
   z-index: 1; }
   .single-articles-area .article-thumbnail {
     position: relative;
