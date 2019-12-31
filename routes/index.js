@@ -13,7 +13,4 @@ router.get('/contact', function(req, res, next) {
 
 router.get('/deals', deals.detailsDeals);
 
-
-
-
 module.exports = router;
