@@ -2,17 +2,18 @@ var express = require('express');
 var router = express.Router();
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Trang chủ' });
-});
+const deals = require("../controller/dealController");
+const index = require("../controller/indexController");
+
+router.get('/', index.home);
 
 router.get('/contact', function(req, res, next) {
   res.render('contact.hbs', { title: 'Liên hệ' });
 });
 
-router.get('/deals', function(req, res, next) {
- res.render('deals.hbs', { title: 'Ưu đãi' });  
-});
+router.get('/deals', deals.detailsDeals);
+
+
 
 router.get('/:id', function (req, res, next) {
     console.log(+req.params.id);

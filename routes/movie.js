@@ -35,4 +35,10 @@ router.get('/', function (req, res, next) {
     });
 });
 
+router.get('/:id/', function(req,res,next)
+{
+    //localhost3000:/movies/?id=1
+}
+)
+
 module.exports = router;

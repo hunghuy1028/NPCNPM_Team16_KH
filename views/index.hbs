@@ -1,51 +1,22 @@
     <div class="hero-area">
         <!-- Hero Post Slides -->
         <div class="hero-post-slides owl-carousel">
-
+            {{#each bigposter}}
             <!-- Single Slide -->
-            <div class="single-slide bg-img bg-overlay" style="background-image: url(img/bg-img/matbiec.jpg);">
+            <div class="single-slide bg-img bg-overlay" style="background-image: url({{img}});">
                 <!-- Blog Content -->
                 <div class="container h-100">
                     <div class="row h-100 align-items-center">
                         <div class="col-12 col-lg-9">
                             <div class="blog-content" data-animation="fadeInUp" data-delay="100ms">
-                                <h2 data-animation="fadeInUp" data-delay="400ms">MẮT BIẾC</h2>
-                                <p data-animation="fadeInUp" data-delay="700ms">Một sự kết hợp tinh tế vẻ đẹp thuần khiết của văn chương Nguyễn Nhật Ánh, với những khung hình mãn nhãn đặc trưng của Victor Vũ, đã từng khiến khán giả choáng ngợp từ “Thiên mệnh anh hùng” tới “Tôi thấy hoa vàng trên cỏ xanh”</p>
+                                <h2 data-animation="fadeInUp" data-delay="400ms">{{name}}</h2>
+                                <p data-animation="fadeInUp" data-delay="700ms">{{description}}</p>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-
-            <!-- Single Slide -->
-            <div class="single-slide bg-img bg-overlay" style="background-image: url(img/bg-img/tretraukhoinghiep.jpg);">
-                <!-- Blog Content -->
-                <div class="container h-100">
-                    <div class="row h-100 align-items-center">
-                        <div class="col-12 col-lg-9">
-                            <div class="blog-content" data-animation="fadeInUp" data-delay="100ms">
-                                <h2 data-animation="fadeInUp" data-delay="400ms">TRẺ TRÂU KHỞI NGHIỆP</h2>
-                                <p data-animation="fadeInUp" data-delay="700ms">Những tưởng đường đời sẽ dễ thở hơn trường học, đôi bạn Taek-Il (Park Jung-Min) và Sang-Pil (Jung Hae-In) quyết nghỉ học để dấn thân vào đời. Taek-il xin làm shipper cho tiệm mì của đầu bếp Ma Dong-seok “cục súc", còn Sang-Pil đi theo bọn cho vay nặng lãi đòi nợ thuê. Từ đây hai thanh niên "trẻ trâu" mới có cơ hội nếm vị trưởng thành sau những lần bị đời vùi dập.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-             <div class="single-slide bg-img bg-overlay" style="background-image: url(img/bg-img/diepvienandanh.jpg);">
-                <!-- Blog Content -->
-                <div class="container h-100">
-                    <div class="row h-100 align-items-center">
-                        <div class="col-12 col-lg-9">
-                            <div class="blog-content" data-animation="fadeInUp" data-delay="100ms">
-                                <h2 data-animation="fadeInUp" data-delay="400ms">ĐIỆP VIÊN ẨN DANH</h2>
-                                <p data-animation="fadeInUp" data-delay="700ms">Biệt đội giải cứu thế giới của siêu điệp viên Lance Sterling và các phụ tá siêu tài năng và thông minh!</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
+            {{/each}}
         </div>
     </div>
     <!-- ##### Hero Area End ##### -->
