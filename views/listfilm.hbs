@@ -27,12 +27,12 @@
                             <img src="/poster/movie/{{id}}.jpg" alt="">
                         </div>
                         <div class="game-content">
-                            <a href="/movies/?id={{id}}/" class="game-title">{{ten}}</a>
+                            <a href="/movies/detail/?id={{id}}" class="game-title">{{ten}}</a>
                             <div>Nội dung:</div>
                             <p>{{mota}}</p>                           
                             <div>Thời lượng: {{thoiluong}} phút</div>
                             <div>Năm: {{nam}}</div><br>
-                            <button type="button" class=" btn btn-success" onclick="window.location.href='/{{id}}'">Chi tiết</button>
+                            <button type="button" class=" btn btn-success" onclick="window.location.href='/movies/detail/?id={{id}}'">Chi tiết</button>
                         </div>
                     </div>
                     {{/each}}
