@@ -6,8 +6,20 @@ var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
 var staffRouter = require('./routes/staff');
+var mongoose = require("mongoose");
 
 var app = express();
+
+// mongoose.connect('mongodb+srv://admin123:admin123@cluster0-zdvf1.mongodb.net/test?retryWrites=true&w=majority', { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true }).
+// then(
+//     () => {
+//         console.log('KN THANH CONG')
+ 
+//     },
+//     err => { /** handle initial connection error */
+//         console.log(err);
+//     }
+// );
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
