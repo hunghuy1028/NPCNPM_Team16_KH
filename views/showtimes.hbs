@@ -1,0 +1,74 @@
+    <section class="breadcrumb-area bg-img bg-overlay" style="background-image: url(/poster/deals/tetga.jpg);">
+        <div class="container h-100">
+            <div class="row h-100 align-items-center">
+                <!-- Breadcrumb Text -->
+                <div class="col-12">
+                    <div class="breadcrumb-text">
+                        <h2>Lịch chiếu</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ##### Monthly Picks Area Start ##### -->
+    <section class="monthly-picks-area section-padding-100 bg-pattern">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="left-right-pattern"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <!-- Title -->
+                    <h2 class="section-title mb-70 wow fadeInUp" data-wow-delay="100ms">Lịch chiếu phim</h2>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12">
+                    <ul class="nav nav-tabs wow fadeInUp" data-wow-delay="300ms" id="myTab" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" id="popular-tab" data-toggle="tab" href="#popular" role="tab" aria-controls="popular" aria-selected="true">Chọn ngày</a>
+                        </li>
+                        {{#each content}}
+                        <li class="nav-item">
+                            <a class="nav-link" id="tab{{pos}}-tab" data-toggle="tab" href="#tab{{pos}}" role="tab" aria-controls="tab{{pos}}" aria-selected="false">{{pos}}/1</a>
+                        </li>
+                        {{/each}}
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="tab-content wow fadeInUp" data-wow-delay="500ms" id="myTabContent">
+            {{!-- <div class="tab-pane fade show active" id="popular" role="tabpanel" aria-labelledby="popular-tab"></div> --}}
+            {{#each content}}
+            <div class="tab-pane fade show" id="tab{{pos}}" role="tabpanel" aria-labelledby="tab{{pos}}-tab">   
+                <div class="row justify-content-center">
+                    <div class="col-12 col-lg-8">
+                        <div class="mt-100">
+                            <div class="single-articles-area d-flex flex-wrap mb-30">
+                                <div class="article-thumbnail">
+                                    <img src="{{day.url}}" alt=""/>
+                                </div>
+                                <div class="article-content">
+                                    <a href="#" class="post-title">{{day.name}}</a>
+                                    <p>{{day.xc}}</p><span class="mycolor">Còn 120 ghế</span>
+                                    <p>1</p><span class="mycolor">Còn 120 ghế</span>
+                                    <p>2</p><span class="mycolor">Còn 120 ghế</span>
+                                </div>
+                            </div>     
+                        </div>
+                    </div>
+                    <div class="col-6 col-sm-6 col-md-2 col-lg-1"></div>
+                </div>
+            </div>
+            {{/each}}
+        </div>
+    </section>
+    <!-- ##### Monthly Picks Area End ##### -->
