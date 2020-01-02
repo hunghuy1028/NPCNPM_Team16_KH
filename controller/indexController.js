@@ -1,47 +1,48 @@
 const Movie = require('../models/movies');
-const Admin = require('../models/admins');
 
 exports.home = async (req, res, next) =>
 {
     let bigposter = [];
-    const indexposter = await Movie.find({}).limit(3);
-    console.log(indexposter);
-    for(var i=0;i<=2;i++)
+    const indexposter = await Movie.aggregate([{$sample: {size: 3}}]);
+    
+    for(var i=0;i< indexposter.length;i++)
     {
         let item={};
+        console.log(indexposter[i]._id);
         item.img=indexposter[i]._id;
         item.name=indexposter[i].Name;
-        item.Description = indexposter[i].Description;
+        item.description = indexposter[i].Description;
 
         bigposter.push(item);
     }
 
     let watch =[];
-    let i1 = {};
-    i1.img = "/poster/movie/1i.jpg";
-    i1.name = "MẮT BIẾC";
-    i1.category ="Tình cảm";
+    const indexwatch = await Movie.aggregate([{$sample: {size: 7}}]);
 
-    let i2 = {}, i3={};
+    for(var i=0;i<indexwatch.length;i++)
+    {
+        let item={};
+        item.img=indexwatch[i]._id;
+        item.name=indexwatch[i].Name;
+        item.category= indexwatch[i].Category;
 
-    i2.img = "/poster/movie/2i.jpg";
-    i2.name = "Trẻ trâu khởi nghiệp";
-    i2.category ="Hài";
+        watch.push(item);
+    }
 
-    i3.img = "/poster/movie/3i.jpg";
-    i3.name = "ĐIỆP VIÊN ẨN DANH";
-    i3.category ="Hoạt hình";
+    let featurewatch =[];
+
+    const indexfeaturewatch = await Movie.find({Year: {$gt: 2019}});
+    for(var i=0;i<indexfeaturewatch.length;i++)
+    {
+        let item={};
+        item.img=indexfeaturewatch[i]._id;
+        item.name=indexfeaturewatch[i].Name;
+        item.category= indexfeaturewatch[i].Category;
+
+        featurewatch.push(item);
+    }
+
     
-    watch.push(i1);
-    watch.push(i2);
-    watch.push(i3);
-    watch.push(i1);
-    watch.push(i2);
-    watch.push(i3);
-    watch.push(i1);
-    watch.push(i2);
-    watch.push(i3);
-
-    res.render("index.hbs",{title:"Movie Cinema", bigposter:bigposter, watch:watch});
+    res.render("index.hbs",{title:"Movie Cinema", bigposter:bigposter, watch:watch, featurewatch: featurewatch});
 
 }
