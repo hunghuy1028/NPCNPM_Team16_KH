@@ -6,20 +6,22 @@ var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
 var staffRouter = require('./routes/staff');
+var movie = require('./routes/movie');
 var mongoose = require("mongoose");
 
 var app = express();
 
-// mongoose.connect('mongodb+srv://admin123:admin123@cluster0-zdvf1.mongodb.net/test?retryWrites=true&w=majority', { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true }).
-// then(
-//     () => {
-//         console.log('KN THANH CONG')
+mongoose.connect('mongodb+srv://admin123:admin123@cluster0-zdvf1.mongodb.net/movie?retryWrites=true&w=majority', 
+{ useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true }).
+then(
+    () => {
+        console.log('KN THANH CONG')
  
-//     },
-//     err => { /** handle initial connection error */
-//         console.log(err);
-//     }
-// );
+    },
+    err => { /** handle initial connection error */
+        console.log(err);
+    }
+);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -31,7 +33,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/movies',require('./routes/movie'));
+app.use('/movies', movie);
 app.use('/', indexRouter);
 app.use('/staff', staffRouter);
 
