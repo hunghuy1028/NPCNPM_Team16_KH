@@ -4,6 +4,7 @@ exports.listfilm = (req,res,next) =>
     //phim 1
     const row1 = {};
     row1.id = 1;
+    //==> row1.id = Movie[i]._id 
     row1.ten = 'Mắt biếc';
     row1.thoiluong = 121;
     row1.mota = 'Mắt Biếc: Một sự kết hợp tinh tế vẻ đẹp thuần khiết của văn chương Nguyễn Nhật Ánh, với những khung hình mãn nhãn đặc trưng của Victor Vũ, đã từng khiến khán giả choáng ngợp từ “Thiên mệnh anh hùng” tới “Tôi thấy hoa vàng trên cỏ xanh”.'
