@@ -35,39 +35,92 @@
                         <li class="nav-item">
                             <a class="nav-link active" id="popular-tab" data-toggle="tab" href="#popular" role="tab" aria-controls="popular" aria-selected="true">Chọn ngày</a>
                         </li>
-                        {{#each content}}
+                        
                         <li class="nav-item">
-                            <a class="nav-link" id="tab{{pos}}-tab" data-toggle="tab" href="#tab{{pos}}" role="tab" aria-controls="tab{{pos}}" aria-selected="false">{{pos}}/1</a>
+                            <a class="nav-link" id="tab1-tab" data-toggle="tab" href="#tab1" role="tab" aria-controls="tab1" aria-selected="false">Hôm nay ({{date.homnay}})</a>
                         </li>
-                        {{/each}}
+                        <li class="nav-item">
+                            <a class="nav-link" id="tab2-tab" data-toggle="tab" href="#tab2" role="tab" aria-controls="tab2" aria-selected="false">Ngày mai ({{date.ngaymai}})</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="tab3-tab" data-toggle="tab" href="#tab3" role="tab" aria-controls="tab3" aria-selected="false">Ngày kia ({{date.ngaykia}})</a>
+                        </li>
                     </ul>
                 </div>
             </div>
         </div>
 
         <div class="tab-content wow fadeInUp" data-wow-delay="500ms" id="myTabContent">
-            {{#each content}}
-            <div class="tab-pane fade show" id="tab{{pos}}" role="tabpanel" aria-labelledby="tab{{pos}}-tab">   
+           
+            <div class="tab-pane fade show" id="tab1" role="tabpanel" aria-labelledby="tab1-tab">   
                 <div class="row justify-content-center">
                     <div class="col-12 col-lg-8">
                         <div class="mt-100">
+                            {{#each today}}
                             <div class="single-articles-area d-flex flex-wrap mb-30">
                                 <div class="article-thumbnail">
-                                    <img src="{{day.url}}" alt=""/>
+                                    <img src="/poster/movie/{{img}}.jpg" alt=""/>
                                 </div>
                                 <div class="article-content">
-                                    <a href="#" class="post-title">{{day.name}}</a>
-                                    <p>{{day.xc}}</p><span class="mycolor">Còn 120 ghế</span>
-                                    <p>1</p><span class="mycolor">Còn 120 ghế</span>
-                                    <p>2</p><span class="mycolor">Còn 120 ghế</span>
+                                    <a href="#" class="post-title">{{name}}</a>
+                                    {{#each xc}}
+                                        <p>Rạp: {{idrap}}. <span class="mycolor"> Xuất {{time}}</span></p>
+                                    {{/each}}
                                 </div>
-                            </div>     
+                            </div>    
+                            {{/each}} 
                         </div>
                     </div>
                     <div class="col-6 col-sm-6 col-md-2 col-lg-1"></div>
                 </div>
             </div>
-            {{/each}}
+
+            <div class="tab-pane fade show" id="tab2" role="tabpanel" aria-labelledby="tab2-tab">   
+                <div class="row justify-content-center">
+                    <div class="col-12 col-lg-8">
+                        <div class="mt-100">
+                            {{#each tomorrow}}
+                            <div class="single-articles-area d-flex flex-wrap mb-30">
+                                <div class="article-thumbnail">
+                                    <img src="/poster/movie/{{img}}.jpg" alt=""/>
+                                </div>
+                                <div class="article-content">
+                                    <a href="#" class="post-title">{{name}}</a>
+                                    {{#each xc}}
+                                        <p>Rạp: {{idrap}}. <span class="mycolor"> Xuất {{time}}</span></p>
+                                    {{/each}}
+                                </div>
+                            </div>    
+                            {{/each}}    
+                        </div>
+                    </div>
+                    <div class="col-6 col-sm-6 col-md-2 col-lg-1"></div>
+                </div>
+            </div>
+
+            <div class="tab-pane fade show" id="tab3" role="tabpanel" aria-labelledby="tab3-tab">   
+                <div class="row justify-content-center">
+                    <div class="col-12 col-lg-8">
+                        <div class="mt-100">
+                            {{#each twodaynext}}
+                            <div class="single-articles-area d-flex flex-wrap mb-30">
+                                <div class="article-thumbnail">
+                                    <img src="/poster/movie/{{img}}.jpg" alt=""/>
+                                </div>
+                                <div class="article-content">
+                                    <a href="#" class="post-title">{{name}}</a>
+                                    {{#each xc}}
+                                        <p>Rạp: {{idrap}}. <span class="mycolor"> Xuất {{time}}</span></p>
+                                    {{/each}}
+                                </div>
+                            </div>    
+                            {{/each}}     
+                        </div>
+                    </div>
+                    <div class="col-6 col-sm-6 col-md-2 col-lg-1"></div>
+                </div>
+            </div>
+            
         </div>
     </section>
     <!-- ##### Monthly Picks Area End ##### -->

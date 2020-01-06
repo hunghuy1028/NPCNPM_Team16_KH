@@ -1,4 +1,6 @@
 const Movie = require('../models/movies');
+const showtimes = require('../models/showtimes');
+const cinemas = require('../models/cinemas');
 
 exports.listfilm = async (req,res,next) =>
 {
@@ -53,43 +55,142 @@ exports.details = (req, res, next) =>
     });
 }
 
-exports.showtimes = (req, res, next) =>
+exports.showtimes = async (req, res, next) =>
 {
-    const days= 5;
-    let content = [];
-    let day1={};
-    day1.url = "/poster/movie/1i.jpg";
-    day1.name ="MẮT BIẾC";
-    day1.xc="12h20";
+    let today = [];
+    let tomorrow = [];
+    let twodaynext = [];
+    let date={};
 
-    let day2={};
-    day2.url = "/poster/movie/2i.jpg";
-    day2.name ="MẮT BIẾC";
-    day2.xc ="12h20";
+    const homnay = new Date(new Date().setHours(0,0,0,0));
+    const ngaymai = new Date(homnay.getTime() + 24 * 60 * 60 * 1000);
+    const ngaykia = new Date(homnay.getTime() + 2* 24 * 60 * 60 * 1000);
+    const ngay3 = new Date(homnay.getTime() + 3* 24 * 60 * 60 * 1000);
+    date.homnay = String(homnay.getDate()).padStart(2, '0') + "/" + String(homnay.getMonth() + 1).padStart(2, '0');
+    date.ngaymai = String(ngaymai.getDate()).padStart(2, '0') + "/" + String(ngaymai.getMonth() + 1).padStart(2, '0');
+    date.ngaykia = String(ngaykia.getDate()).padStart(2, '0') + "/" + String(ngaykia.getMonth() + 1).padStart(2, '0');
+    console.log(homnay.getDay());
+    console.log(date.homnay);
 
-    let day3={};
-    day3.url = "/poster/movie/3i.jpg";
-    day3.name ="MẮT BIẾC";
-    day3.xc ="12h20";
 
-    let day4={};
-    day4.url = "/poster/movie/1i.jpg";
-    day4.name ="MẮT BIẾC";
-    day4.xc ="12h20";
+   const filmtoday = await showtimes.find({Time: {$gte: homnay, $lt:  ngaymai}});
+   const filmtomrrow = await showtimes.find({Time: {$gte: ngaymai, $lt:  ngaykia}});
+   const filmtwodaynext = await showtimes.find({Time: {$gte: ngaykia, $lt: ngay3 }});
 
-    let day5={};
-    day5.url = "/poster/movie/3i.jpg";
-    day5.name ="MẮT BIẾC";
-    day5.xc ="12h20";
+   const phimday1 = [];
+   const phimday2 = [];
+   const phimday3 = [];
 
-    content[1]={pos: 1, day: day1};
-    content[2]={pos: 2, day: day2};
-    content[3]={pos: 3, day: day3};
-    content[4]={pos: 4, day: day4};
-    content[5]={pos: 5, day: day5};
+    for(var i=0;i< filmtoday.length;i++)
+    {
+        const idphim = filmtoday[i].MovieID;
+        if(phimday1.includes(idphim) == false)
+            phimday1.push(idphim);
+    }
 
-    console.log(content);
+    for(var i=0;i<phimday1.length;i++)
+    {
+        let phim1= {};
+        phim1.img = phimday1[i];
+        
+        let t = await Movie.findById(phimday1[i]);
+        phim1.name = t.Name;
+        phim1.xc=[];
+        for(var j=0; j<filmtoday.length;j++)
+        {
+            var idMovie = filmtoday[j].MovieID;
+            if(idMovie == phimday1[i])
+            {
+                const idfind = filmtoday[j].CinemaID;
+                const findRap  = await cinemas.findById(idfind);
+                const idrap = findRap.Name;
+                const t = new Date(filmtoday[j].Time); 
+                const hour = t.getHours();
+                const minutes = t.getMinutes();
+                const time = hour +":"+ minutes; 
+                const temp = {};
+                temp.idrap = idrap;
+                temp.time = time;
+                phim1.xc.push(temp);    
+            }
+        }
+        today.push(phim1);
+    }
+    
 
-    res.render('showtimes.hbs',{title:"Lịch chiếu", content: content});
+    for(var i=0;i< filmtomrrow.length;i++)
+    {
+        const idphim = filmtomrrow[i].MovieID;
+        if(phimday2.includes(idphim) == false)
+            phimday2.push(idphim);
+    }
 
+    for(var i=0;i<phimday2.length;i++)
+    {
+        let phim1= {};
+        phim1.img = phimday2[i];
+        
+        let t = await Movie.findById(phimday2[i]);
+        phim1.name = t.Name;
+        phim1.xc=[];
+        for(var j=0; j<filmtomrrow.length;j++)
+        {
+            var idMovie = filmtomrrow[j].MovieID;
+            if(idMovie == phimday2[i])
+            {
+                const idfind = filmtomrrow[j].CinemaID;
+                const findRap  = await cinemas.findById(idfind);
+                const idrap = findRap.Name;
+                const t = new Date(filmtomrrow[j].Time); 
+                const hour = t.getHours();
+                const minutes = t.getMinutes();
+                const time = hour +":"+ minutes; 
+                const temp = {};
+                temp.idrap = idrap;
+                temp.time = time;
+                phim1.xc.push(temp);    
+            }
+        }
+        tomorrow.push(phim1);
+    }
+
+
+    for(var i=0;i< filmtwodaynext.length;i++)
+    {
+        const idphim = filmtwodaynext[i].MovieID;
+        if(phimday3.includes(idphim) == false)
+            phimday3.push(idphim);
+    }
+
+    for(var i=0;i<phimday3.length;i++)
+    {
+        let phim1= {};
+        phim1.img = phimday3[i];
+        
+        let t = await Movie.findById(phimday3[i]);
+        phim1.name = t.Name;
+        phim1.xc=[];
+        for(var j=0; j<filmtwodaynext.length;j++)
+        {
+            var idMovie = filmtwodaynext[j].MovieID;
+            if(idMovie == phimday3[i])
+            {
+                const idfind = filmtwodaynext[j].CinemaID;
+                const findRap  = await cinemas.findById(idfind);
+                const idrap = findRap.Name;
+                const t = new Date(filmtwodaynext[j].Time); 
+                const hour = t.getHours();
+                const minutes = t.getMinutes();
+                const time = hour +":"+ minutes; 
+                const temp = {};
+                temp.idrap = idrap;
+                temp.time = time;
+                phim1.xc.push(temp);    
+            }
+        }
+        twodaynext.push(phim1);
+    }
+
+    console.log(today);
+    res.render('showtimes.hbs',{title:"Lịch chiếu", today: today, tomorrow:tomorrow, twodaynext: twodaynext, date: date});
 }
