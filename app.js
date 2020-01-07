@@ -4,10 +4,9 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
-var indexRouter = require('./routes/index');
-var staffRouter = require('./routes/staff');
-var movie = require('./routes/movie');
 var mongoose = require("mongoose");
+
+const session = require('express-session');
 
 var app = express();
 
@@ -32,6 +31,28 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+app.use(session({
+  secret: 'keyboard cat',
+  resave: false,
+  saveUninitialized: true,
+  // cookie: {
+  //     secure: true
+  // }
+}))
+
+app.use((req, res, next) => {
+  if (typeof (req.session.isAuthenticated) === 'undefined') {
+    req.session.isAuthenticated = false;
+  }
+  res.locals.isAuthenticated = req.session.isAuthenticated;
+  res.locals.authUser = req.session.authUser;
+  next();
+})
+
+var indexRouter = require('./routes/index');
+var staffRouter = require('./routes/staff');
+var movie = require('./routes/movie');
 
 app.use('/movies', movie);
 app.use('/', indexRouter);

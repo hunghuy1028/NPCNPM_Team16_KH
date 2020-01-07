@@ -59,7 +59,11 @@
                             </div>
                             <!-- Login Area -->
                             <div class="login-area">
+                                {{#if isAuthenticated}}
+                                <a href="/staff/logout"><span>Logout</span> <i class="fa fa-lock" aria-hidden="true"></i></a>
+                                {{else}}
                                 <a href="/staff/login"><span>Login</span> <i class="fa fa-lock" aria-hidden="true"></i></a>
+                                {{/if}}
                             </div>
                         </div>
                     </div>
@@ -93,6 +97,9 @@
                                     <li><a href="/">Trang chủ</a></li>
                                     <li><a href="/movies">Phim</a> </li>
                                     <li><a href="/movies/showtimes">Lịch chiếu</a></li>
+                                    {{#if isAuthenticated}}
+                                    <li><a href="/staff/booking">Đặt vé</a></li>
+                                    {{/if}}
                                     <li><a href="/deals">Ưu đãi</a></li>
                                     <li><a href="/contact">Liên hệ</a></li>
                                 </ul>
