@@ -1,5 +1,5 @@
    <!-- ##### Breadcrumb Area Start ##### -->
-    <section class="breadcrumb-area bg-img bg-overlay" style="background-image: url(poster/deals/tetga.jpg);">
+    <section class="breadcrumb-area bg-img bg-overlay" style="background-image: url(/poster/deals/5e0e041f7891b6216cc667ad.jpg);">
         <div class="container h-100">
             <div class="row h-100 align-items-center">
                 <!-- Breadcrumb Text -->
@@ -24,15 +24,16 @@
                         <!-- *** Single Articles Area *** -->
                         <div class="single-articles-area d-flex flex-wrap mb-30">
                             <div class="article-thumbnail">
-                                <img src={{img}} alt=""/>
+                                <img src="/poster/deals/{{id}}.jpg" alt=""/>
                             </div>
                             <div class="article-content">
                                 <a href="#" class="post-title">{{name}}</a>
                                 <div class="post-meta">
-                                    <a href="#" class="post-date">{{time}}</a>
-                                    <a href="#" class="post-comments">{{price}}</a>
+                                    <a href="#" class="post-date">Đến {{date}}</a>
+                                    <a href="#" class="post-comments">-{{discount}}</a>
                                 </div>
-                                {{description}}
+                                <p>{{condition}}</p>
+                                <p>{{description}}</p>
                             </div>
                         </div>
                         {{/each}}

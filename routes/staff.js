@@ -1,20 +1,20 @@
 var express = require('express');
 var router = express.Router();
 
-var staff = require('../controller/staffController');
+const staffController = require('../controller/staffController');
 
-router.get('/login',staff.login);
+router.get('/login', function(req, res, next) {
+  res.render('login.hbs',{layout: false});
+});
 
-router.post('/login',staff.authenticate);
-router.get('/logout',staff.logout);
+router.get('/login',staffController.login);
 
+router.post('/login',staffController.authenticate);
+router.get('/logout',staffController.logout);
 
-router.get('/booking',staff.auth, function(req,res,next)
-{
-  res.render('book-ticket.hbs',{layout:false})
-})
+router.get('/booking',staffController.auth, staffController.Booking);
 
-router.post('/booking',staff.auth, function(req,res,next)
+router.post('/booking',staffController.auth, function(req,res,next)
 {
   console.log(req.body);
 })

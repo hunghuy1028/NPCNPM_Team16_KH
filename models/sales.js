@@ -6,14 +6,18 @@ const Sale = new Schema({
         type: String,
         require: true,
     },
+    Condition:
+    {
+        type: String,
+    },
     Description: {
         type: String,
     },
     Discount: {
-        type: Number
+        type: String,
     },
     DueDate: {
-        type: Date
+        type: String,
     }
 })
 
