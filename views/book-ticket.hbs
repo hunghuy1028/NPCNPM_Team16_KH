@@ -35,7 +35,7 @@
 					<div class="col-md-8">
 						<div class="booking-form">
 						<div class="form-header">
-							<h1>Đặt vé</h1>
+							<h1 id="date">Đặt vé </h1>
 						</div>
 						<form method="POST">
 							<div class="form-group">
@@ -50,45 +50,40 @@
 								<div class="row">
 								<div class="col-md-6">
 									<div class="form-group">
-										<select class="form-control" name="movies">
+										<select class="form-control" name="movies" id="movies" onchange="filmFunction()">
                                             <option></option>
-											<option value="P1">Mắt biếc</option>
-											<option value="P2">A</option>
-											<option value="P3">B</option>
+											{{#each today}}
+											<option value="{{id}}">{{name}}</option>
+											{{/each}}
 										</select>
 										<span class="select-arrow"></span>
 										<span class="form-label">Phim</span>
 									</div>
 								</div>
-								<div class="col-md-3">
+								<div class="col-md-6">
 									<div class="form-group">
-										<select class="form-control" name="showtimes">
+										<select class="form-control" name="showtimes" id="showtimes">
                                             <option></option>
-											<option value="1">1h</option>
-											<option value="2">2h</option>
-											<option value="3">3h</option>
+											
 										</select>
 										<span class="select-arrow"></span>
-										<span class="form-label">Xuất</span>
-									</div>
-								</div>
-								<div class="col-md-3">
-									<div class="form-group">
-										<select class="form-control">
-											<option>1</option>
-										</select>
-										<span class="select-arrow"></span>
-										<span class="form-label">Rạp</span>
+										<span class="form-label">Xuất chiếu - Rạp</span>
 									</div>
 								</div>
 							</div>
 
 							<div class="row">
 								<div class="col-md-6">
-									<div class="form-group">
-										<input class="form-control" type="text" id="date">
-										<span class="form-label" id='date'>Ngày</span>
-									</div>
+								<div class="form-group">
+										<select class="form-control" name="deals">
+                                            <option value="none">Không</option>
+											<option value="member">Member</option>
+											<option value="1">10h</option>
+											<option value="2">A</option>
+										</select>
+										<span class="select-arrow"></span>
+										<span class="form-label">Ưu đãi</span>
+								</div>
 								</div>
 
 								<div class="col-md-3">
@@ -97,6 +92,9 @@
 											<option value="A">A</option>
 											<option value="B">B</option>
 											<option value="C">C</option>
+											<option value="A">D</option>
+											<option value="B">E</option>
+											<option value="C">F</option>
 										</select>
 										<span class="select-arrow"></span>
 										<span class="form-label">Hàng</span>
@@ -109,6 +107,9 @@
 											<option value="1">1</option>
 											<option value="2">2</option>
 											<option value="3">3</option>
+											<option value="1">4</option>
+											<option value="2">5</option>
+											<option value="3">6</option>
 										</select>
 										<span class="select-arrow"></span>
 										<span class="form-label">Cột</span>
@@ -119,16 +120,7 @@
 
 							<div class="row">
 							<div class="col-md-6">
-									<div class="form-group">
-										<select class="form-control" name="deals">
-                                            <option value="none">Không</option>
-											<option value="member">Member</option>
-											<option value="1">10h</option>
-											<option value="2">A</option>
-										</select>
-										<span class="select-arrow"></span>
-										<span class="form-label">Ưu đãi</span>
-									</div>
+									
 							</div>
 							</div>
                             <div class="row">
@@ -147,9 +139,9 @@
 				</div>
 				<div class="col-md-4">
                     <div class="form-btn text-right">
-						<button><a href="/">Home</a></button>
+						
 					</div>
-						<p class="text-right">Xin chào!!!</p>
+						
 						<p></p>
 						<p></p>
 						<h2>Thông tin vé</h2>
@@ -187,13 +179,42 @@
 			}
 		}
 
-		n =  new Date();
-		y = n.getFullYear();
-		m = n.getMonth() + 1;
-		d = n.getDate();
-		document.getElementById("date").value = m + "/" + d + "/" + y;
+		const todayz =  new Date();
+		year = todayz.getFullYear();
+		month = todayz.getMonth() + 1;
+		day = todayz.getDate();
+		document.getElementById('date').innerHTML = "Đặt vé "+ day + "/" + month + "/" + year;
+
+		function filmFunction()
+		{
+			const phim ={{{tong}}}
+			var film = document.getElementById("movies").value;
+			
+			for(var i=0 ;i<phim.length;i++)
+			{
+				if(phim[i].id == film)
+				{
+					{{!-- var select = document.getElementById("showtimes");
+					var length2 = select.options.length;
+					for (a = 0; a < length2; a++) {
+						select.options[a] = null;
+					} --}}
+
+					$('#showtimes').children().remove().end().append('<option selected value="whatever"></option>') ;
+					for(var j=0; j<phim[i].xc.length;j++)
+					{
+						var opt = document.getElementById("showtimes");
+						var option = document.createElement("option");
+						var content = phim[i].xc[j];
+						option.text = content;
+						opt.add(option);
+					}
+				}
+			}
+		}
 
 	</script>
+
 
 </body>
 

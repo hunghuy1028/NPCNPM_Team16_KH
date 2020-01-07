@@ -69,9 +69,6 @@ exports.showtimes = async (req, res, next) =>
     date.homnay = String(homnay.getDate()).padStart(2, '0') + "/" + String(homnay.getMonth() + 1).padStart(2, '0');
     date.ngaymai = String(ngaymai.getDate()).padStart(2, '0') + "/" + String(ngaymai.getMonth() + 1).padStart(2, '0');
     date.ngaykia = String(ngaykia.getDate()).padStart(2, '0') + "/" + String(ngaykia.getMonth() + 1).padStart(2, '0');
-    console.log(homnay.getDay());
-    console.log(date.homnay);
-
 
    const filmtoday = await showtimes.find({Time: {$gte: homnay, $lt:  ngaymai}});
    const filmtomrrow = await showtimes.find({Time: {$gte: ngaymai, $lt:  ngaykia}});
