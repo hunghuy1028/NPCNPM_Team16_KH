@@ -97,11 +97,12 @@
                                     <li><a href="/">Trang chủ</a></li>
                                     <li><a href="/movies">Phim</a> </li>
                                     <li><a href="/movies/showtimes">Lịch chiếu</a></li>
-                                    {{#if isAuthenticated}}
-                                    <li><a href="/staff/booking">Đặt vé</a></li>
-                                    {{/if}}
+                                    
                                     <li><a href="/deals">Ưu đãi</a></li>
                                     <li><a href="/contact">Liên hệ</a></li>
+                                    {{#if isAuthenticated}}
+                                    <li><a href="/staff/booking"><strong>Đặt vé</strong></a></li>
+                                    {{/if}}
                                 </ul>
                             </div>
                             <!-- Nav End -->

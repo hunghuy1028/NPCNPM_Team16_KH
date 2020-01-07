@@ -51,9 +51,9 @@
 								<div class="col-md-6">
 									<div class="form-group">
 										<select class="form-control" name="movies" id="movies" onchange="filmFunction()">
-                                            <option></option>
+                                            <option>_</option>
 											{{#each today}}
-											<option value="{{id}}">{{name}}</option>
+											<option value="{{id}}" >{{name}}</option>
 											{{/each}}
 										</select>
 										<span class="select-arrow"></span>
@@ -63,11 +63,11 @@
 								<div class="col-md-6">
 									<div class="form-group">
 										<select class="form-control" name="showtimes" id="showtimes">
-                                            <option></option>
+                                            <option>_</option>
 											
 										</select>
 										<span class="select-arrow"></span>
-										<span class="form-label">Xuất chiếu - Rạp</span>
+										<span class="form-label">Rạp - Xuất chiếu</span>
 									</div>
 								</div>
 							</div>
@@ -75,11 +75,11 @@
 							<div class="row">
 								<div class="col-md-6">
 								<div class="form-group">
-										<select class="form-control" name="deals">
-                                            <option value="none">Không</option>
-											<option value="member">Member</option>
-											<option value="1">10h</option>
-											<option value="2">A</option>
+										<select class="form-control" name="deals" id= 'deals' disabled>
+											<option value='null' id='0'>Không</option>
+                                           {{#each uudai}}
+										   <option value="{{_id}}" id='{{Discount}}'>{{Name}}</option>
+										   {{/each}}
 										</select>
 										<span class="select-arrow"></span>
 										<span class="form-label">Ưu đãi</span>
@@ -88,7 +88,7 @@
 
 								<div class="col-md-3">
 									<div class="form-group">
-										<select class="form-control" name="row">
+										<select class="form-control" name="row" id='row'> 
 											<option value="A">A</option>
 											<option value="B">B</option>
 											<option value="C">C</option>
@@ -103,7 +103,7 @@
 
 								<div class="col-md-3">
 									<div class="form-group">
-										<select class="form-control" name="column">
+										<select class="form-control" name="col" id='col'> 
 											<option value="1">1</option>
 											<option value="2">2</option>
 											<option value="3">3</option>
@@ -126,11 +126,11 @@
                             <div class="row">
                                 <div class="col-md-9">
 							    <div class="form-btn">
-								    <button class="submit-btn" type="submit">Đặt vé</button>
+								    <button class="submit-btn" type="submit" onclick="buyFunction()">Đặt vé</button>
                                 </div>
 						        </div>
                             <div class="form-btn">
-								<button class="submit-btn" type="reset">Hủy</button>
+								<button class="submit-btn" type="reset" onclick="cancleFunction()">Hủy</button>
 							</div>
                             </div>
 						</form>
@@ -138,22 +138,31 @@
 					
 				</div>
 				<div class="col-md-4">
-                    <div class="form-btn text-right">
+					<h1 class="h1-size">Thông tin vé</h1>
+					<div class="row">
+					<div class="col-md-4">
+						<p class="p-size">Phim: </p>
+						<p class="p-size">Giờ: </p>
+						<p class="p-size">Ngày: </p>
+						<p class="p-size">Ghế: </p>
+						<p class="p-size">Ưu đãi:</p>
 						
 					</div>
-						
-						<p></p>
-						<p></p>
-						<h2>Thông tin vé</h2>
-						<p>Phim: <span>MB</span></p>
-						<p>Giờ: <span>15h00</span></p>
-						<p>Ngày: <span>1/1/2020</span></p>
-						<p>Ghế: <span>A</span><span>1</span></p>
-						<p>Ưu đãi: <span>Không</span></p>
-
+					<div class="col-md-8">
+						<p class="text-right mytextright1" id='phim'>_</p>
+						<p class="text-right mytextright1" id='gio12'>_</p>
+						<p class="text-right mytextright1" id='date2'>_</p>
+						<p class="text-right mytextright1" id='ghe'>A1</p>
+						<p class="text-right mytextright1" id='uudai2'>-</p>
+						<p class="text-right mytextright1" id='uudai'>Không</p>
 						<hr/>
-						<p>Thành tiền</p>
-						<p class="mytext-right1">45.000đ</p>
+						<p class="text-right mytextright1 mycolor" id='tien'>_</p>
+					</div>
+					</div>
+
+						
+						
+						
 					</div>
 				</div>
 			</div>
@@ -170,6 +179,45 @@
 			floatedLabel($(this));
 		});
 
+		$('#showtimes').change(function () {
+			const selectShow = $("#showtimes option:selected").html();
+			$('#gio12').text(selectShow);
+		})
+
+		$('#deals').change( function() {
+			const a = $('#deals option:selected').html();
+			$('#uudai').text(a);
+		})
+
+		$('#row').change( function(){
+			const a = $('#row option:selected').html();
+			const current = $('#ghe').text();
+			const col = current.substring(1,2);
+			const result = String(a) + String(col);
+			$('#ghe').text(result);
+		})
+
+		$('#col').change( function(){
+			const a = $('#col option:selected').html();
+			const current = $('#ghe').text();
+			const row = current.substring(0,1);
+			const result = String(row) + String(a);
+			$('#ghe').text(result);
+		})
+
+		$("#deals").change(function() {
+			var id = $(this).children(":selected").attr("id");
+			id = parseInt(id);
+			var price = 50000;
+			var discount = price -id;
+			discount = String(discount) + " Đ";
+			newprice = " - " + String(id) +" Đ";
+			$('#uudai2').text(newprice);
+			$('#tien').text(discount);
+		});
+
+	
+
 		function floatedLabel(input) {
 			var $field = input.closest('.form-group');
 			if (input.val()) {
@@ -184,12 +232,16 @@
 		month = todayz.getMonth() + 1;
 		day = todayz.getDate();
 		document.getElementById('date').innerHTML = "Đặt vé "+ day + "/" + month + "/" + year;
+		document.getElementById('date2').innerHTML = day + "/" + month + "/" + year;
 
 		function filmFunction()
 		{
+			document.getElementById('deals').disabled = false;
 			const phim ={{{tong}}}
 			var film = document.getElementById("movies").value;
-			
+			const film1 = $("#movies option:selected").html();
+			$('#phim').text(film1);
+			$('#tien').text('50000 Đ');
 			for(var i=0 ;i<phim.length;i++)
 			{
 				if(phim[i].id == film)
@@ -200,19 +252,34 @@
 						select.options[a] = null;
 					} --}}
 
-					$('#showtimes').children().remove().end().append('<option selected value="whatever"></option>') ;
+					$('#showtimes').children().remove().end().append('<option selected value="">_</option>') ;
 					for(var j=0; j<phim[i].xc.length;j++)
 					{
 						var opt = document.getElementById("showtimes");
 						var option = document.createElement("option");
-						var content = phim[i].xc[j];
+						var content = phim[i].xc[j].info;
+						var val = phim[i].xc[j].idxc;
 						option.text = content;
+						option.value = val;
 						opt.add(option);
 					}
 				}
 			}
 		}
 
+		function cancleFunction()
+		{
+			$('#phim').text('_');
+			$('#gio12').text('_');
+			$('#ghe').text('A1');
+			$('#tien').text('_');
+			$('#uudai').text('Không');
+		}
+
+		function buyFunction()
+		{
+			
+		}
 	</script>
 
 
