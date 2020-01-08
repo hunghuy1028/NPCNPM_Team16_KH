@@ -36,6 +36,7 @@ exports.authenticate = async (req,res,next) =>
 
     console.log(req.session.isAuthenticated);
     req.session.isAuthenticated = true;
+    req.session.authUser = st;
     const url = req.query.retUrl || '/';
     res.redirect(url);
 
@@ -53,6 +54,8 @@ const cinemas = require("../models/cinemas");
 
 module.exports.Booking = async (req, res, next)=>
 {
+    //thong tin nhan vien duoc luu trong req.session.authUser
+    console.log(req.session.authUser);
     //let tong = {};
     let today = [];
     const phimday1 = [];
