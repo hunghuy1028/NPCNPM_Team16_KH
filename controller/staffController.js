@@ -106,3 +106,9 @@ module.exports.Booking = async (req, res, next)=>
     console.log(today);
     res.render("book-ticket.hbs",{today:today, tong:tong, uudai:uudai});
 }
+
+module.exports.sendBooking = (req, res, next)=>
+{   
+    console.log(req.body);
+    
+}

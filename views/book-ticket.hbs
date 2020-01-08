@@ -28,6 +28,14 @@
 </head>
 
 <body>
+	{{#if err_message}}
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          {{err_message}}
+        </div>
+        {{/if}}
 	<div id="booking" class="section">
 		<div class="section-center">
 			<div class="container">

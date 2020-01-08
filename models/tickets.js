@@ -3,16 +3,24 @@ const Schema = mongoose.Schema;
 
 const Ticket = new Schema({
     StaffID: {
-        type: ObjectId,
-        require: true,
-        ref: 'staffs'
+        type: String,
+        require: true
     },
-    TicketID: {
-        type: ObjectId,
-        require: true,
-        ref: 'ticketDetails'
+    ShowtimeID:
+    {
+        type: String,
+        require: true
     },
-    Cost: {
+    Position: {
+        type: String,
+        require: true,
+    },
+    SaleID: {
+        type: String,
+        require: true
+    },
+    Cost:
+    {
         type: Number,
         require: true
     }

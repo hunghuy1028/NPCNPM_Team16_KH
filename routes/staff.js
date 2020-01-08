@@ -14,9 +14,6 @@ router.get('/logout',staffController.logout);
 
 router.get('/booking',staffController.auth, staffController.Booking);
 
-router.post('/booking',staffController.auth, function(req,res,next)
-{
-  console.log(req.body);
-  console.log(req.user);
-})
+router.post('/booking',staffController.auth, staffController.sendBooking);
+
 module.exports = router;
