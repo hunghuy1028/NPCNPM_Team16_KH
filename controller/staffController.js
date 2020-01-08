@@ -1,5 +1,12 @@
 const staff = require('../models/staffs');
+const ticket = require('../models/tickets');
 var bcrypt = require('bcryptjs');
+const showtimes = require("../models/showtimes");
+const Movie = require("../models/movies");
+const cinemas = require("../models/cinemas");
+const sale = require('../models/sales');
+
+
 
 exports.auth = (req,res,next) => {
     if (req.session.isAuthenticated === false){
@@ -48,15 +55,11 @@ exports.logout = (req,res,next) =>
     req.session.authUser = null;
     res.redirect('/');
 }
-const showtimes = require("../models/showtimes");
-const Movie = require("../models/movies");
-const cinemas = require("../models/cinemas");
-const sale = require('../models/sales');
 
 module.exports.Booking = async (req, res, next)=>
 {
     //thong tin nhan vien duoc luu trong req.session.authUser
-    console.log(req.session.authUser);
+    
     //let tong = {};
     let today = [];
     const phimday1 = [];
@@ -105,13 +108,51 @@ module.exports.Booking = async (req, res, next)=>
         today.push(phim1);
     }
     const tong = JSON.stringify(today);
-    console.log(tong)
-    console.log(today);
     res.render("book-ticket.hbs",{today:today, tong:tong, uudai:uudai});
 }
 
-module.exports.sendBooking = (req, res, next)=>
+module.exports.sendBooking = async (req, res, next)=>
 {   
-    console.log(req.body);
-    
+    const showtimes = req.body.showtimes;
+    const deals = req.body.deals;
+    const position = String(req.body.row) + String(req.body.col);
+    console.log(position);
+    const staff =  req.session.authUser;
+    const staffid = staff[0]._id;
+    const isExistPos = await ticket.findOne({Position: position});
+    if(isExistPos !== null)
+    {
+        req.flash('error_msg','Ghế đã tồn tại!');
+        res.redirect('/staff/booking');
+    }
+    else
+    {
+        let discount =0;
+        if(parseInt(deals)===0)
+        {
+            discount =0;
+        }
+        else
+        {
+            const giamgia = await sale.findOne({_id: deals});
+            discount  = giamgia.Discount;
+        }
+        const Total = 50000 - parseInt(discount);
+
+        const newTicket = new ticket({
+            StaffID: staffid,
+            ShowtimeID: showtimes,
+            Position: position,
+            SaleID: deals,
+            Cost: Total
+        });
+
+        console.log(newTicket);
+
+        newTicket.save().then(()=>
+        {
+            req.flash('error_msg','Đặt vé thành công. Kiểm tra hóa đơn');
+            res.redirect('/staff/booking');
+        })
+    }
 }

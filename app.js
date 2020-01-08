@@ -1,6 +1,7 @@
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
+var flash = require('connect-flash');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
@@ -40,6 +41,13 @@ app.use(session({
   //     secure: true
   // }
 }))
+
+app.use(flash());
+app.use(async (req, res, next) =>
+{
+  res.locals.error_msg = req.flash('error_msg');
+  next();
+})
 
 app.use((req, res, next) => {
   if (typeof (req.session.isAuthenticated) === 'undefined') {
