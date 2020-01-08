@@ -1555,3 +1555,19 @@ img {
 {
   color: #F62817 !important;
 }
+
+.h1-size
+{
+  font-size: 45px;
+}
+
+.p-size
+{
+  font-size: 16px;
+}
+
+.mytextright1
+{
+  font-size: 16px;
+  font-weight: 1000 !important;
+}

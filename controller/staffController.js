@@ -51,6 +51,7 @@ exports.logout = (req,res,next) =>
 const showtimes = require("../models/showtimes");
 const Movie = require("../models/movies");
 const cinemas = require("../models/cinemas");
+const sale = require('../models/sales');
 
 module.exports.Booking = async (req, res, next)=>
 {
@@ -59,8 +60,10 @@ module.exports.Booking = async (req, res, next)=>
     //let tong = {};
     let today = [];
     const phimday1 = [];
+    const homnay1= new Date();
     const homnay = new Date(new Date().setHours(0,0,0,0));
     const ngaymai = new Date(homnay.getTime() + 24 * 60 * 60 * 1000);
+    const uudai = await sale.find({});
 
     const filmtoday = await showtimes.find({Time: {$gte: homnay, $lt:  ngaymai}});
 
@@ -81,6 +84,7 @@ module.exports.Booking = async (req, res, next)=>
         for(var j=0; j<filmtoday.length;j++)
         {
             var idMovie = filmtoday[j].MovieID;
+            
             if(idMovie == phimday1[i])
             {
                 const idfind = filmtoday[j].CinemaID;
@@ -91,8 +95,11 @@ module.exports.Booking = async (req, res, next)=>
                 const minutes = t.getMinutes();
                 const time = hour +":"+ minutes; 
 
-                const infor = "Rạp: "+idrap+"- Thời gian: "+time;
-                phim1.xc.push(infor);
+                const infor = "Rạp: "+idrap+" - Thời gian: "+time;
+                const temp = {};
+                temp.idxc=filmtoday[j]._id;
+                temp.info=infor;
+                phim1.xc.push(temp);
             }
         }
         today.push(phim1);
@@ -100,5 +107,5 @@ module.exports.Booking = async (req, res, next)=>
     const tong = JSON.stringify(today);
     console.log(tong)
     console.log(today);
-    res.render("book-ticket.hbs",{today:today, tong:tong});
+    res.render("book-ticket.hbs",{today:today, tong:tong, uudai:uudai});
 }

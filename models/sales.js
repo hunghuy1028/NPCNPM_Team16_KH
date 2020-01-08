@@ -14,7 +14,7 @@ const Sale = new Schema({
         type: String,
     },
     Discount: {
-        type: String,
+        type: Number,
     },
     DueDate: {
         type: String,
