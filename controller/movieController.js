@@ -57,7 +57,7 @@ exports.showtimes = async (req, res, next) =>
     for(var i=0;i<phimday1.length;i++)
     {
         let phim1= {};
-        
+        phim1.id=phimday1[i];
         let t = await Movie.findById(phimday1[i]);
         phim1.name = t.Name;
         phim1.cover = t.Cover;
@@ -94,6 +94,7 @@ exports.showtimes = async (req, res, next) =>
     for(var i=0;i<phimday2.length;i++)
     {
         let phim1= {};
+        phim1.id=phimday2[i];
         
         let t = await Movie.findById(phimday2[i]);
         phim1.name = t.Name;
@@ -131,6 +132,7 @@ exports.showtimes = async (req, res, next) =>
     for(var i=0;i<phimday3.length;i++)
     {
         let phim1= {};
+        phim1.id=phimday3[i];
         
         let t = await Movie.findById(phimday3[i]);
         phim1.name = t.Name;
