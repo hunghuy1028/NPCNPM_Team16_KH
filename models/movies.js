@@ -27,6 +27,14 @@ const Movie = new mongoose.Schema({
     Comingsoon:
     {
         type: Boolean
+    },
+    Poster:
+    {
+        type: String
+    },
+    Cover:
+    {
+        type: String
     }
 
 })

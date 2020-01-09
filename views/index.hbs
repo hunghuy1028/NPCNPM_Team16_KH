@@ -3,7 +3,7 @@
         <div class="hero-post-slides owl-carousel">
             {{#each bigposter}}
             <!-- Single Slide -->
-            <div class="single-slide bg-img bg-overlay" style="background-image: url(/poster/movie/{{img}}.jpg);">
+            <div class="single-slide bg-img bg-overlay" style="background-image: url({{cover}});">
                 <!-- Blog Content -->
                 <div class="container h-100">
                     <div class="row h-100 align-items-center">
@@ -60,9 +60,9 @@
                     {{#each watch}}
                     <!-- Single Games -->
                     <div class="single-games-slide">
-                        <img src="/poster/movie/view-chi-tiet/{{img}}.jpg" alt="">
+                        <img src="{{poster}}" alt="">
                         <div class="slide-text">
-                            <a href="#" class="game-title">{{name}}</a>
+                            <a href="/movies/detail/?id={{id}}" class="game-title">{{name}}</a>
                             <div class="meta-data">
                                 <a href="#">Đánh giá: 9.1/10</a>
                                 <a href="#">{{category}}</a>
@@ -78,9 +78,9 @@
                     {{#each featurewatch}}
                     <!-- Single Games -->
                     <div class="single-games-slide">
-                        <img src="/poster/movie/view-chi-tiet/{{img}}.jpg" alt="">
+                        <img src="{{poster}}" alt="">
                         <div class="slide-text">
-                            <a href="#" class="game-title">{{name}}</a>
+                            <a href="/movies/detail/?id={{id}}" class="game-title">{{name}}</a>
                             <div class="meta-data">
                                 <a href="#">Đánh giá: 9.1/10</a>
                                 <a href="#">{{category}}</a>
