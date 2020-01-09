@@ -17,7 +17,7 @@ exports.details = async (req, res, next) =>
     console.log(req.query.id);
     
     const row = await Movie.findById(req.query.id);
-
+    console.log(row);
     res.render('single-film-review.hbs', {
         title: 'Review',
         movie: row,
