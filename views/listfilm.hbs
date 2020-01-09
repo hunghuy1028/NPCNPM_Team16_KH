@@ -1,5 +1,3 @@
-  <!-- ##### Header Area End ##### -->
-
     <!-- ##### Breadcrumb Area Start ##### -->
     <div class="breadcrumb-area bg-img bg-overlay" style="background-image: url(/img/bg-img/27.jpg);">
         <div class="container h-100">
@@ -24,14 +22,15 @@
                     <!-- *** Single Review Area *** -->
                     <div class="single-game-review-area d-flex flex-wrap mb-30">
                         <div class="game-thumbnail">
-                            <img src="/poster/movie/{{id}}.jpg" alt="">
+                            <img src="{{Cover}}" alt="">
                         </div>
                         <div class="game-content">
                             <a href="/movies/detail/?id={{id}}" class="game-title">{{Name}}</a>
                             <div>Nội dung:</div>
                             <p>{{Description}}</p>                           
                             <div>Thời lượng: {{Length}} phút</div>
-                            <div>Năm: {{Year}}</div><br>
+                            <div>Năm: {{Year}}</div>
+                            {{#if Comingsoon}}<div>Tình trạng: Sắp chiếu</div>{{else}} <div>Tình trạng: Đang chiếu</div>{{/if}}<br>
                             <button type="button" class=" btn btn-success" onclick="window.location.href='/movies/detail/?id={{id}}'">Chi tiết</button>
                         </div>
                     </div>
