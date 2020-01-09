@@ -68,7 +68,7 @@ module.exports.Booking = async (req, res, next)=>
     const ngaymai = new Date(homnay.getTime() + 24 * 60 * 60 * 1000);
     const uudai = await sale.find({});
 
-    const filmtoday = await showtimes.find({Time: {$gte: homnay, $lt:  ngaymai}});
+    const filmtoday = await showtimes.find({Time: {$gte: homnay1, $lt:  ngaymai}});
 
     for(var i=0;i< filmtoday.length;i++)
     {
@@ -119,7 +119,7 @@ module.exports.sendBooking = async (req, res, next)=>
     console.log(position);
     const staff =  req.session.authUser;
     const staffid = staff[0]._id;
-    const isExistPos = await ticket.findOne({Position: position});
+    const isExistPos = await ticket.findOne({Position: position, ShowtimeID: showtimes});
     if(isExistPos !== null)
     {
         req.flash('error_msg','Ghế đã tồn tại!');

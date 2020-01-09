@@ -23,7 +23,12 @@ const Movie = new mongoose.Schema({
     },
     Description: {
         type: String
+    },
+    Comingsoon:
+    {
+        type: Boolean
     }
+
 })
 
 module.exports = mongoose.model('movies', Movie);

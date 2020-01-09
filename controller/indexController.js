@@ -3,7 +3,7 @@ const Movie = require('../models/movies');
 exports.home = async (req, res, next) =>
 {
     let bigposter = [];
-    const indexposter = await Movie.aggregate([{$sample: {size: 3}}]);
+    const indexposter = await Movie.aggregate([{$sample: {size: 4}}]);
     
     for(var i=0;i< indexposter.length;i++)
     {
@@ -17,7 +17,7 @@ exports.home = async (req, res, next) =>
     }
 
     let watch =[];
-    const indexwatch = await Movie.aggregate([{$sample: {size: 7}}]);
+    const indexwatch = await Movie.find({Comingsoon: false}).limit(6);
 
     for(var i=0;i<indexwatch.length;i++)
     {
@@ -31,7 +31,7 @@ exports.home = async (req, res, next) =>
 
     let featurewatch =[];
 
-    const indexfeaturewatch = await Movie.find({Year: {$gt: 2019}});
+    const indexfeaturewatch = await Movie.find({Comingsoon: true}).limit(6);
     for(var i=0;i<indexfeaturewatch.length;i++)
     {
         let item={};
