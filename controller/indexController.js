@@ -8,8 +8,7 @@ exports.home = async (req, res, next) =>
     for(var i=0;i< indexposter.length;i++)
     {
         let item={};
-        console.log(indexposter[i]._id);
-        item.img=indexposter[i]._id;
+        item.cover=indexposter[i].Cover;
         item.name=indexposter[i].Name;
         item.description = indexposter[i].Description;
 
@@ -22,7 +21,7 @@ exports.home = async (req, res, next) =>
     for(var i=0;i<indexwatch.length;i++)
     {
         let item={};
-        item.img=indexwatch[i]._id;
+        item.poster=indexwatch[i].Poster;
         item.name=indexwatch[i].Name;
         item.category= indexwatch[i].Category;
 
@@ -35,7 +34,7 @@ exports.home = async (req, res, next) =>
     for(var i=0;i<indexfeaturewatch.length;i++)
     {
         let item={};
-        item.img=indexfeaturewatch[i]._id;
+        item.poster=indexfeaturewatch[i].Poster;
         item.name=indexfeaturewatch[i].Name;
         item.category= indexfeaturewatch[i].Category;
 
